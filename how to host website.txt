@@ -1,0 +1,22 @@
+dist/ is the final built website folder that Netlify hosts.
+
+When you change your code (in src/), Netlify won’t see those changes until you build again.
+Building again (npm run build) creates a new/updated dist/.
+Then you upload that new dist/ to Netlify (drag‑and‑drop) to update your live site.
+So: edit → build → upload dist/ (only when you want the live site to reflect your latest changes).
+
+
+
+2. "The 'Filtered Trend Analysis' dropdowns (Subject/Section/Micro-topic) are visible all the time. They should only be visible if we have selected the 'Filtered Trend Analysis' tab."
+
+3. "Regarding the sync button: It is showing 'Fetching latest questions...' but I want it to show the real-time count of questions being fetched (e.g., Fetched X of Y)."
+
+4.also, make sure the 'Add to Notebook' button is visible in the Review section—right now it is missing."
+
+5. the merged question should get saved in "UPSC CSE OFFICIAL" named provider
+
+6.   in the PYQ analysis section., first on the front page this chart is showing now... here it should show only of one subject by default which is economy and then if we want to deselect economy and select other subject that should be possible and if we want to select other subjects then we can click on them and we can select them and if someone wants to see all then there is this option of all and none. Okay so just make sure this works. Right now this button is not working. Like when I am clicking on all it is showing all subjects when I am clicking on none then it is not getting blank. So this button is not working. Okay? So make sure this thing is working."
+
+7. And then we have this subject distribution chart. Okay? So here right now just below the chart write this note: 'Click on the subject to deep dive more into analysis.' Okay? So as we click on economy then... then the micro topics of economy they comes up. That is good. When we reach this... right now when we click on economy on the subject distribution then here comes the... names of sections in economy and their relevance and then when we click on it here comes the micro topics. And now here inside microtopic if I click on any then make sure that its particular questions come and in that window there is a button of study and attempt. Study questions and another should be attempt questions. This way. Okay? So this should happen... and right now like if other than economy if I am clicking on any subject for which I don't have sections so then after clicking it it is just showing a black white color pie chart and nothing else. And now since no sections are visible so I cannot click on any and I cannot enter inside my other microtopics. So here make sure like if there is section is absent in that particular then it should directly show the microtopics in the next chart which comes after clicking the button. Okay? This make sure."
+
+8.  for the microtopic heat 

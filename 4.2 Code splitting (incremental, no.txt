@@ -1,0 +1,30 @@
+4.2 Code splitting (incremental, not a rewrite)
+Stopped statically importing ./modules/charts.js and ./modules/pyq-donut-infographic.js in src/app.js
+Added lazy import() wrappers so those modules only load when their views actually need them.
+Also fixed: CDN global → npm import
+MiniSearch now comes from npm: import MiniSearch from "minisearch";
+Chart.js now comes from npm and is assigned to window.Chart in src/main.js (so your existing charts.js keeps working unchanged).
+What you need to do to maintain functionality
+How to run now
+Install deps: npm install
+Dev: npm run dev
+Build: npm run build (deploy dist/)
+Preview build: npm run preview
+When you add libraries
+Prefer npm install <pkg> + import ... instead of adding new CDN <script> tags in index.html.
+If an existing module expects a global (like charts.js expects window.Chart), either:
+keep the global shim in src/main.js, or
+refactor that module to use ESM imports directly.
+Lazy-loaded modules (Phase 4.2 pattern)
+If you move more heavy code out of src/app.js, keep these rules:
+Don’t reference lazy code at top-level; load it inside a function using import()
+After a lazy module loads, trigger a cheap re-render (as done for charts/donut)
+What is still CDN-based (optional next step)
+These still load from CDN in index.html:
+
+pdf.js (window.pdfjsLib)
+lottie-player
+canvas-confetti
+They’re unchanged for now to avoid breaking behavior, but Phase 4’s goal (“fewer CDN surprises”) would eventually migrate these into npm imports too.
+
+Files added/changed: vite.config.js, postcss.config.cjs, tailwind.config.cjs, src/tailwind.css, src/main.js, updated index.html, updated package.json, updated src/app.js.

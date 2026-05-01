@@ -1,0 +1,43 @@
+4.1 Vite: Yes, do it. It gives you:
+
+Hashed assets (cacheable, long-lived)
+A real dist/ build you can deploy anywhere
+Better dev server + dependency handling (no “CDN surprise” for core libs)
+4.2 Code splitting: Also yes, and you can do it incrementally:
+
+Keep src/app.js as the “core shell + routing”
+Move heavy views into modules and lazy import() only when needed (admin, pyq analysis, PDF viewer, big modals)
+This will cut initial parse/compile time significantly without rewriting everything.
+4.3 Tailwind build: Strongly yes. CDN Tailwind is convenient but:
+
+Adds an extra network dependency
+You don’t get tree-shaken CSS
+You can end up shipping far more CSS than needed
+With Vite, building Tailwind is straightforward and gives predictable results.
+4.4 Service worker: Agree as a “4b.” It’s most valuable after Vite because hashed assets make SW caching sane and low-risk.
+
+A key reality check for your current app
+Right now index.html pulls in several CDN scripts: Chart.js, pdf.js, minisearch, confetti, lottie, Tailwind CDN. With Vite, you’ll want to:
+
+npm install most of these and import them (or keep a couple as external, but that undermines the “no CDN surprises” goal).
+Ensure globals like MiniSearch become module imports (since Vite won’t magically provide them on window unless you do).
+
+
+
+
+What you’d need to maintain functionality after Phase 4
+Replace global CDN globals with imports
+Example: MiniSearch currently comes from a CDN UMD bundle; you’d switch to import MiniSearch from 'minisearch' (or named export depending on package).
+Same idea for Chart.js, pdfjs, confetti, etc.
+Keep index.html minimal
+Vite prefers a single entry like src/main.js which imports CSS + starts the app.
+Be disciplined about lazy boundaries
+Anything lazy-loaded must not be referenced at top-level in app.js anymore; you call it only after await import(...).
+Recommendation on sequencing
+Do 4.1 + 4.3 together, then 4.2, then 4.4:
+
+Vite migration is the “platform”
+Tailwind build is easiest once Vite exists
+Code splitting becomes trivial once everything is module-based
+Service worker becomes safe once assets are hashed
+If you want me to implement Phase 4 next, I’ll proceed with Vite + moving the current app bootstrap and pick one heavy area (Admin) as the first lazy-split to prove the pattern—without trying to restructure all 20k lines at once
